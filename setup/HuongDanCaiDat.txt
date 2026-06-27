@@ -1,0 +1,180 @@
+HƯỚNG DẪN CÀI ĐẶT VÀ CHẠY DỰ ÁN COFFEESHOPMANAGER
+
+1. THÔNG TIN DỰ ÁN
+
+Tên đề tài: Xây dựng website bán cafe và giải khát
+Tên dự án: CoffeeShopManager
+Công nghệ sử dụng: ASP.NET Core MVC, C#, Entity Framework Core, SQL Server
+Cơ sở dữ liệu: CoffeeShopDB
+
+2. CẤU TRÚC THƯ MỤC NỘP BÀI
+
+Dự án được tổ chức theo cấu trúc sau:
+
+ASPNET-DK24TT8017-VONHATMINH-WEBBANCAFE/
+├── setup/
+│   ├── CoffeeShopDB.sql
+│   └── HuongDanCaiDat.txt
+├── src/
+│   └── CoffeeShopManager/
+└── thesis/
+├── doc/
+│   └── VoNhatMinh.docx
+└── pdf/
+└── VoNhatMinh.pdf
+
+Trong đó:
+
+* setup/: Chứa file cơ sở dữ liệu và hướng dẫn cài đặt.
+* src/: Chứa toàn bộ mã nguồn dự án ASP.NET Core MVC.
+* thesis/doc/: Chứa file báo cáo Word.
+* thesis/pdf/: Chứa file báo cáo PDF.
+
+3. YÊU CẦU MÔI TRƯỜNG
+
+Trước khi chạy dự án, máy tính cần cài đặt các phần mềm sau:
+
+* Visual Studio 2022
+* .NET SDK phù hợp với dự án
+* SQL Server
+* SQL Server Management Studio
+* Trình duyệt Google Chrome hoặc Microsoft Edge
+
+4. CÀI ĐẶT CƠ SỞ DỮ LIỆU
+
+Bước 1: Mở SQL Server Management Studio.
+
+Bước 2: Kết nối vào SQL Server trên máy tính.
+
+Bước 3: Tạo database mới với tên:
+
+CoffeeShopDB
+
+Bước 4: Mở file CoffeeShopDB.sql trong thư mục setup.
+
+Bước 5: Chạy toàn bộ nội dung file CoffeeShopDB.sql để tạo bảng và dữ liệu mẫu.
+
+Sau khi chạy thành công, kiểm tra trong database CoffeeShopDB có các bảng chính sau:
+
+* DanhMucs
+* SanPhams
+* NguoiDungs
+* DonHangs
+* ChiTietDonHangs
+
+5. CẤU HÌNH CHUỖI KẾT NỐI
+
+Bước 1: Mở thư mục mã nguồn trong src.
+
+Bước 2: Mở dự án bằng file CoffeeShopManager.sln trong Visual Studio.
+
+Bước 3: Mở file appsettings.json.
+
+Bước 4: Kiểm tra và chỉnh sửa chuỗi kết nối SQL Server cho phù hợp với máy đang chạy.
+
+Ví dụ:
+
+"ConnectionStrings": {
+"DefaultConnection": "Server=.;Database=CoffeeShopDB;Trusted_Connection=True;TrustServerCertificate=True;"
+}
+
+Ghi chú:
+
+* Nếu SQL Server dùng tên server khác, thay dấu chấm "." bằng tên server của máy.
+* Nếu dùng SQL Server Express, có thể sửa thành:
+  "Server=.\SQLEXPRESS;Database=CoffeeShopDB;Trusted_Connection=True;TrustServerCertificate=True;"
+
+6. CHẠY DỰ ÁN
+
+Bước 1: Mở Visual Studio.
+
+Bước 2: Mở file CoffeeShopManager.sln trong thư mục src/CoffeeShopManager.
+
+Bước 3: Kiểm tra lại chuỗi kết nối trong appsettings.json.
+
+Bước 4: Chọn chế độ chạy HTTPS hoặc IIS Express.
+
+Bước 5: Nhấn Ctrl + F5 hoặc bấm nút Run để chạy website.
+
+Bước 6: Khi trình duyệt mở lên, truy cập website theo địa chỉ localhost được Visual Studio tạo, ví dụ:
+
+https://localhost:7157
+
+7. CHỨC NĂNG CHÍNH CỦA HỆ THỐNG
+
+7.1. Phân hệ khách hàng
+
+Người dùng có thể thực hiện các chức năng:
+
+* Đăng ký tài khoản
+* Đăng nhập, đăng xuất
+* Xem danh sách sản phẩm
+* Tìm kiếm và lọc sản phẩm
+* Xem chi tiết sản phẩm
+* Thêm sản phẩm vào giỏ hàng
+* Cập nhật giỏ hàng
+* Đặt hàng
+* Xem đơn hàng của tôi
+* Hủy đơn hàng khi đơn còn ở trạng thái chờ xử lý
+
+7.2. Phân hệ quản trị viên
+
+Admin có thể thực hiện các chức năng:
+
+* Xem Dashboard
+* Quản lý sản phẩm
+* Quản lý danh mục
+* Quản lý đơn hàng
+* Cập nhật trạng thái đơn hàng
+* Quản lý người dùng
+
+8. TÀI KHOẢN KIỂM THỬ
+
+Tài khoản Admin:
+
+Email: ........................................
+Mật khẩu: ....................................
+
+Tài khoản User:
+
+Email: Có thể đăng ký trực tiếp trên website
+Mật khẩu: Người dùng tự tạo khi đăng ký
+
+Ghi chú: Sinh viên cần điền tài khoản Admin thực tế đã có trong cơ sở dữ liệu trước khi nộp bài.
+
+9. MỘT SỐ LỖI THƯỜNG GẶP VÀ CÁCH KHẮC PHỤC
+
+9.1. Lỗi không kết nối được cơ sở dữ liệu
+
+Nguyên nhân có thể do sai tên server hoặc chưa tạo database CoffeeShopDB.
+
+Cách khắc phục:
+
+* Kiểm tra SQL Server đã chạy chưa.
+* Kiểm tra tên server trong appsettings.json.
+* Kiểm tra database CoffeeShopDB đã được tạo chưa.
+* Chạy lại file CoffeeShopDB.sql trong SQL Server Management Studio.
+
+9.2. Lỗi không hiển thị hình ảnh sản phẩm
+
+Nguyên nhân có thể do sai tên file ảnh hoặc file ảnh chưa nằm trong thư mục wwwroot/images.
+
+Cách khắc phục:
+
+* Kiểm tra ảnh sản phẩm đã nằm trong thư mục wwwroot/images.
+* Kiểm tra tên file trong cột HinhAnh của bảng SanPhams.
+* Đảm bảo tên file trong database trùng với tên file ảnh thực tế.
+
+9.3. Lỗi không đăng nhập được
+
+Nguyên nhân có thể do nhập sai email, mật khẩu hoặc tài khoản chưa tồn tại.
+
+Cách khắc phục:
+
+* Kiểm tra tài khoản trong bảng NguoiDungs.
+* Kiểm tra đúng email và mật khẩu.
+* Đăng ký tài khoản mới nếu chưa có tài khoản User.
+
+10. GHI CHÚ
+
+Dự án được xây dựng nhằm phục vụ đồ án môn học Chuyên đề ASP.NET. Hệ thống sử dụng ASP.NET Core MVC, Entity Framework Core, SQL Server, Session và Cookie Authentication để xây dựng website bán cafe và giải khát với hai phân hệ chính là khách hàng và quản trị viên.

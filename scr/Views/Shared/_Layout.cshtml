@@ -1,0 +1,312 @@
+﻿@using CoffeeShopManager.Data
+@inject ApplicationDbContext _context
+
+@{
+    int soLuongDon = 0;
+
+    try
+    {
+        soLuongDon = _context.DonHangs.Count();
+    }
+    catch
+    {
+        soLuongDon = 0;
+    }
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - BonFire Coffeehouse</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Font hỗ trợ tiếng Việt, phong cách hoài cổ -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Noto+Serif+Display:wght@700;900&family=Be+Vietnam+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+            body {
+                margin: 0;
+                background-color: #f8f5ec;
+                font-family: 'Merriweather', 'Noto Serif Display', 'Be Vietnam Pro', serif;
+            }
+
+            .top-header {
+                width: 100%;
+                min-height: 210px;
+                background-color: #f8f5ec;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 25px 45px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .logo-box img {
+                width: 175px;
+                height: 175px;
+                object-fit: contain;
+            }
+
+            .menu-area {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 12px;
+            }
+
+            .hello-row {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .hello-text {
+                color: #3b2a20;
+                font-size: 17px;
+                font-weight: 700;
+                white-space: nowrap;
+            }
+
+            .menu-top {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+
+            .menu-bottom {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 4px;
+            }
+
+            .nav-link-custom,
+            .logout-btn {
+                color: #111;
+                font-size: 17px;
+                font-weight: 900;
+                text-decoration: none;
+                letter-spacing: 1px;
+                padding: 0 0 8px 0;
+                border: none;
+                background: none;
+                cursor: pointer;
+                font-family: 'Merriweather', 'Noto Serif Display', 'Be Vietnam Pro', serif;
+                text-transform: uppercase;
+            }
+
+                .nav-link-custom:hover,
+                .logout-btn:hover {
+                    color: #8b4513;
+                }
+
+                .nav-link-custom.active {
+                    border-bottom: 2px solid #111;
+                }
+
+            .logout-form {
+                display: inline;
+                margin: 0;
+                padding: 0;
+            }
+
+            .order-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                border: 1px solid #555;
+                border-radius: 4px;
+                padding: 9px 18px;
+                color: #111;
+                background-color: transparent;
+                font-size: 17px;
+                font-weight: 900;
+                text-decoration: none;
+                letter-spacing: 1px;
+                white-space: nowrap;
+                font-family: 'Merriweather', 'Noto Serif Display', 'Be Vietnam Pro', serif;
+            }
+
+                .order-btn:hover {
+                    background-color: #3b2a20;
+                    color: white;
+                }
+
+            .order-badge {
+                min-width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background-color: #b22222;
+                color: white;
+                font-size: 13px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2px 6px;
+                font-family: 'Be Vietnam Pro', sans-serif;
+            }
+
+            .main-content {
+                width: 100%;
+                min-height: 600px;
+            }
+
+            /* Sửa font cho tên sản phẩm ở trang Home */
+            .product-name,
+            .ten-san-pham,
+            .menu-item h3,
+            .menu-item h4,
+            .menu-item-title,
+            .card-title,
+            .product-title,
+            .drink-name,
+            .item-name,
+            .product-card h3,
+            .product-card h4,
+            .product-card h5,
+            .menu-card h3,
+            .menu-card h4,
+            .menu-card h5 {
+                font-family: 'Merriweather', 'Noto Serif Display', 'Be Vietnam Pro', serif !important;
+                font-weight: 900;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+
+            /* Nếu tên món đang nằm trong thẻ h3, h4, h5 thì cũng dùng font này */
+            h3, h4, h5 {
+                font-family: 'Merriweather', 'Noto Serif Display', 'Be Vietnam Pro', serif;
+            }
+
+            @@media (max-width: 768px) {
+                .top-header {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+                    padding: 20px;
+                }
+
+                .menu-area {
+                    align-items: center;
+                }
+
+                .hello-row {
+                    justify-content: center;
+                }
+
+                .menu-top {
+                    justify-content: center;
+                    gap: 18px;
+                }
+
+                .menu-bottom {
+                    justify-content: center;
+                }
+
+                .logo-box img {
+                    width: 140px;
+                    height: 140px;
+                }
+            }
+    </style>
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="logo-box">
+            <a asp-controller="Home" asp-action="Index">
+                <img src="~/images/bonfire.png" alt="BonFire Coffeehouse" />
+            </a>
+        </div>
+
+        <nav class="menu-area">
+
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <div class="hello-row">
+                    <span class="hello-text">
+                        Xin chào, @User.Identity.Name
+                    </span>
+                </div>
+            }
+
+            <div class="menu-top">
+                <a asp-controller="Home" asp-action="Index" class="nav-link-custom active">
+                    HOME
+                </a>
+
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="logout-form">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="logout-btn">
+                            Đăng xuất
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Register" class="nav-link-custom">
+                        Đăng ký
+                    </a>
+
+                    <a asp-controller="Account" asp-action="Login" class="nav-link-custom">
+                        Đăng nhập
+                    </a>
+                }
+            </div>
+
+            @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div class="menu-bottom">
+                    <a asp-controller="Admin" asp-action="Dashboard" class="order-btn">
+                        DASHBOARD
+                    </a>
+                    <a asp-controller="DanhMuc" asp-action="Index" class="order-btn">
+                        QUẢN LÝ DANH MỤC
+                    </a>
+                    <a asp-controller="Admin" asp-action="Index" class="order-btn">
+                        QUẢN LÝ SẢN PHẨM
+                    </a>
+                    <a asp-controller="DonHang" asp-action="Index" class="order-btn">
+                        QUẢN LÝ ĐƠN HÀNG
+                    </a>
+                    <a asp-controller="NguoiDung" asp-action="Index" class="order-btn">
+                        QUẢN LÝ NGƯỜI DÙNG
+                    </a>
+                </div>
+            }
+
+            @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+                <div class="menu-bottom">
+                    <a asp-controller="GioHang" asp-action="Index" class="order-btn">
+                        GIỎ HÀNG
+                    </a>
+
+                    <a asp-controller="DonHang" asp-action="CuaToi" class="order-btn">
+                        ĐƠN HÀNG CỦA TÔI
+                    </a>
+                </div>
+            }
+
+        </nav>
+    </header>
+
+    <main role="main" class="main-content">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
